@@ -1,3 +1,8 @@
+> **🚀 Project Ported to Vite & TanStack Router**  
+> This project was migrated from **Next.js** to **Vite** and **TanStack Router** in just a few hours.
+> Expect **broken behaviors** and **gaps** as the implementation being refined.  
+> Contributions and issue reports are welcome!
+
 <h1 align="center">
   <a href="https://lofiplayer.gergo.cc">
   <img src="https://github.com/user-attachments/assets/17a066df-366a-4d4f-a3e6-c0b69db60bfd">
