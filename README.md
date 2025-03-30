@@ -14,9 +14,6 @@
 - 🌙 **Minimalist Design**: Clean and distraction-free interface.
 - ⚡ **Blazing Fast**: Powered by Vite for optimal performance.
 - 🎨 **Smooth Animations**: Framer Motion for delightful transitions.
-- 🗺️ **Type-Safe Routing**: TanStack Router for modern navigation.
-- 📱 **Responsive**: Optimized for all devices.
-- 🛠️ **Lightweight State Management**: Zustand for efficient state handling.
 
 ## 🛠️ Tech Stack
 
