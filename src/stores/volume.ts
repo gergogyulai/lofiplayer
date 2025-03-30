@@ -20,7 +20,7 @@ const initialState: AudioStoreState = {
 
 const useAudioStore = create<AudioStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       ...initialState,
       setVolume: (volume: number) => set({ volume }),
       toggleMute: () => set((state) => ({ muted: !state.muted })),

@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { getStationById } from "@/lib/stations";
 import Player from '@/components/player';
 import Background from '@/components/background';
@@ -11,7 +11,10 @@ export const Route = createFileRoute('/stations/$stationId')({
 function RouteComponent() {
   const { stationId } = Route.useParams()
   const station = getStationById(stationId)
-  console.log(station)
+
+  if (!station) {
+    return null
+  }
 
   if (station.animated && station.animatedBg) {
     return (

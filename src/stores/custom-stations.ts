@@ -32,7 +32,7 @@ const initialState: StationStoreState = {
 
 const useStationStore = create<StationStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       ...initialState,
       addStation: (station: StationType) => set((state) => ({
         stations: [...state.stations, station],

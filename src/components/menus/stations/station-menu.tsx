@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger} from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Input } from "@/components/ui/input"
 import { StationType } from "@/lib/stations";
 import { stations } from "@/lib/stations";
@@ -61,9 +61,8 @@ export default function StationsMenu({ isOpen, onOpenChange } : { isOpen: boolea
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pr-10"
           />
-          {/* eslint-disable-next-line tailwindcss/enforces-shorthand */}
           {search && (
-            <Button size="icon-sm" className="absolute right-2 top-1/2 h-7 w-7 -translate-y-1/2 p-1" onClick={() => {setSearch("")}}>
+            <Button size="icon-sm" className="absolute right-2 top-1/2 size-7 -translate-y-1/2 p-1" onClick={() => {setSearch("")}}>
               <X/>
             </Button>
           )}

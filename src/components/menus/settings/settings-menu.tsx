@@ -1,7 +1,6 @@
 "use client"
 
-import React from 'react';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import {
   Select,
   SelectContent,
@@ -10,7 +9,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
-import { Button } from "@/components/ui/button"
 import Section from '@/components/menus/settings/section';
 import KeyboardShortcut from '@/components/ui/keyboard-shortcut';
 import { useSettingsStore } from '@/stores/settings';
@@ -25,9 +23,7 @@ export default function SettingsMenu({ isOpen, onOpenChange }: { isOpen: boolean
     setNightMode,
     setBackgroundNoise,
     setAnimatedBackground,
-    debugMode,
     disableKeybinds,
-    setDebugMode,
     setDisableKeybinds
   } = useSettingsStore();
 

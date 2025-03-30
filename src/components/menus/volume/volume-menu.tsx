@@ -1,8 +1,5 @@
-"use client";
-
-import React from 'react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Settings, SquareLibrary, VolumeX, Volume, Volume1, Volume2 } from "lucide-react";
+import { VolumeX, Volume, Volume1, Volume2 } from "lucide-react";
 import { Slider } from "@/components/ui/slider"
 import useAudioStore from '@/stores/volume';
 import { Button } from '@/components/ui/button';

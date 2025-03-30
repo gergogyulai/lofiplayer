@@ -21,7 +21,7 @@ const initialState: AmbientAudioStoreState = {
 
 const useAudioStore = create<AmbientStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       ...initialState,
       setAmbientVolume: (volume: number) => set({ volume }),
       toggleAmbientAudio: () => set((state) => ({ enabled: !state.enabled })),
