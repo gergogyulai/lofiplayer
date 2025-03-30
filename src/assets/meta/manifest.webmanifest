@@ -1,0 +1,13 @@
+{
+  "name": "Lofi Player",
+  "description": "Work, study or relax to Lofi music",
+  "orientation": "landscape",
+  "start_url": "/",
+  "scope": ".",
+  "icons": [
+    { "src": "/favicon.png", "type": "image/png", "sizes": "1024x1024" }
+  ],
+  "display": "fullscreen",
+  "theme_color": "#a35630",
+  "categories": "music"
+}
