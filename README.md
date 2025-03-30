@@ -1,6 +1,13 @@
-# Lofiplayer 🎵
+<h1 align="center">
+  <br>
+  <a href="https://lofiplayer.gergo.cc">
+  <img src="https://github.com/user-attachments/assets/17a066df-366a-4d4f-a3e6-c0b69db60bfd">
+  </a>
+  <br>
+  Lofiplayer
+</h1>
 
-**Minimalistic 24/7 lo-fi music player for work, study, or relaxation.** Built with React, TypeScript, and Vite, Lofiplayer delivers a fast and seamless experience for streaming chill beats anytime, anywhere.
+<h4 align="center">Minimalistic 24/7 lo-fi music player for work, study, or relaxation. Built with React, TypeScript, and Vite, Lofiplayer delivers a fast and seamless experience for streaming chill beats anytime, anywhere.</h4>
 
 ## 🚀 Features
 
