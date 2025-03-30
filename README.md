@@ -1,5 +1,4 @@
 <h1 align="center">
-  <br>
   <a href="https://lofiplayer.gergo.cc">
   <img src="https://github.com/user-attachments/assets/17a066df-366a-4d4f-a3e6-c0b69db60bfd">
   </a>
