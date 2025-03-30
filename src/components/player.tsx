@@ -18,12 +18,7 @@ const Player = forwardRef<HTMLDivElement, { station: StationType }>(({ station }
     artwork: [{ src: station.cover, sizes: '96x96', type: 'image/png' }],
   };
 
-  const mediaSessionActions = {
-    onPlay: () => console.log('Playing'),
-    onPause: () => console.log('Paused'),
-  };
-
-  const [state, action, playerRef] = usePlayer(station.streamUrl, mediaMeta, mediaSessionActions);
+  const [state, action, playerRef] = usePlayer(station.streamUrl, mediaMeta);
 
   const containerVariants = {
     hover: { scale: 1.05 },
@@ -49,6 +44,8 @@ const Player = forwardRef<HTMLDivElement, { station: StationType }>(({ station }
         onReady={action.handleBufferEnd}
         onBuffer={action.handleBuffer}
         onBufferEnd={action.handleBufferEnd}
+        onDuration={action.handleDuration}
+        onError={action.handleError}
         className="hidden"
       />
       <div className="rounded-3xl shadow-2xl">
@@ -61,7 +58,7 @@ const Player = forwardRef<HTMLDivElement, { station: StationType }>(({ station }
         >
           <motion.button
             onClick={togglePlaying}
-            disabled={loading}
+            disabled={loading || !!state.error}
             className="group relative flex size-full items-center justify-center"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 1 }}
@@ -74,7 +71,7 @@ const Player = forwardRef<HTMLDivElement, { station: StationType }>(({ station }
               width={300}
               height={300}
               alt={`${station.name} cover`}
-              className="rounded-xl"
+              className={`rounded-xl ${state.error ? 'opacity-50' : ''}`}
               variants={imageVariants}
               transition={{ duration: 0.2 }}
             />
@@ -87,7 +84,11 @@ const Player = forwardRef<HTMLDivElement, { station: StationType }>(({ station }
                   exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
                   transition={{ duration: 0.2 }}
                 >
-                  <PlayerIndicatorIcon playing={playing} loading={loading}/>
+                  {state.error ? (
+                    <div className="text-red-500">Error loading stream</div>
+                  ) : (
+                    <PlayerIndicatorIcon playing={playing} loading={loading}/>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>

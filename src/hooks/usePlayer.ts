@@ -10,23 +10,19 @@ interface MediaMeta {
   artwork: { src: string; sizes: string; type: string }[];
 }
 
-interface MediaSessionActions {
-  onPlay?: () => void;
-  onPause?: () => void;
-}
-
 interface PlayerState {
   url: string | null;
   played: number;
   loaded: number;
   duration: number;
   seeking: boolean;
+  error: Error | null;
 }
 
 interface PlayerAction {
   handlePlay: () => void;
   handlePause: () => void;
-  handleProgress: (state: { played: number }) => void;
+  handleProgress: (state: { played: number; loaded: number }) => void;
   handlePlayPause: () => void;
   handleSeekMouseDown: () => void;
   handleSeekChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -35,16 +31,17 @@ interface PlayerAction {
   handleMuteToggle: () => void;
   handleBuffer: () => void;
   handleBufferEnd: () => void;
+  handleDuration: (duration: number) => void;
+  handleError: (error: Error) => void;
 }
 
 const usePlayer = (
   src: string,
-  mediaMeta: MediaMeta,
-  mediaSessionActions: MediaSessionActions
+  mediaMeta: MediaMeta
 ): [PlayerState, PlayerAction, LegacyRef<ReactPlayer>] => {
   const ref = useRef<ReactPlayer>(null);
-  const { volume, muted, setVolume, toggleMute } = useAudioStore();
-  const { playing, setPlaying, togglePlaying, setLoading } = usePlaybackStore();
+  const { setVolume, toggleMute } = useAudioStore();
+  const { setPlaying, togglePlaying, setLoading } = usePlaybackStore();
 
   const [state, setState] = useState<PlayerState>({
     url: src,
@@ -52,21 +49,23 @@ const usePlayer = (
     loaded: 0,
     duration: 0,
     seeking: false,
+    error: null,
   });
 
   const handlePlay = useCallback(() => {
     setPlaying(true);
-    setLoading(true); // Set loading state when playback starts
+    setLoading(false); // Clear loading state when actually playing
   }, [setPlaying, setLoading]);
 
   const handlePause = useCallback(() => {
     setPlaying(false);
-  }, [setPlaying]);
+    setLoading(false); // Clear loading state when paused
+  }, [setPlaying, setLoading]);
 
-  const handleProgress = useCallback(({ played }: { played: number }) => {
+  const handleProgress = useCallback(({ played, loaded }: { played: number; loaded: number }) => {
     setState(prevState => {
       if (!prevState.seeking) {
-        return { ...prevState, played };
+        return { ...prevState, played, loaded };
       }
       return prevState;
     });
@@ -105,6 +104,16 @@ const usePlayer = (
     setLoading(false); // Clear loading state when buffering ends
   }, [setLoading]);
 
+  const handleDuration = useCallback((duration: number) => {
+    setState(prevState => ({ ...prevState, duration }));
+  }, []);
+
+  const handleError = useCallback((error: Error) => {
+    setState(prevState => ({ ...prevState, error }));
+    setLoading(false); // Clear loading state on error
+    console.error('Player error:', error);
+  }, [setLoading]);
+
   const action: PlayerAction = {
     handlePlay,
     handlePause,
@@ -117,6 +126,8 @@ const usePlayer = (
     handleMuteToggle,
     handleBuffer,
     handleBufferEnd,
+    handleDuration,
+    handleError,
   };
 
   useMediaSession({
@@ -127,8 +138,16 @@ const usePlayer = (
     onPause: handlePause,
   });
 
+  // Update URL when source changes
   useEffect(() => {
-    setState(prevState => ({ ...prevState, url: src }));
+    setState(prevState => ({ 
+      ...prevState, 
+      url: src,
+      // Reset player state when URL changes
+      played: 0,
+      loaded: 0,
+      error: null
+    }));
   }, [src]);
 
   return [state, action, ref];
