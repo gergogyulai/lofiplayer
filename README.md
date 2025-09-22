@@ -1,4 +1,5 @@
-> **🚀 Project Ported to Vite & TanStack Router**  
+> [!NOTE]
+> **🚀 Ported to Vite & TanStack Router**  
 > This project was migrated from **Next.js** to **Vite** and **TanStack Router** in just a few hours.
 > Expect **broken behaviors** and **gaps** as the implementation being refined.  
 > Contributions and issue reports are welcome!
